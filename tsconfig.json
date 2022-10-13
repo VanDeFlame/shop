@@ -11,6 +11,16 @@
     "allowJs": true,
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@scripts/*": ["./src/scripts/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@models/*": ["./src/models/*"],
+      "@src/*": ["./src/*"],
+    }, 
   },
   "include": [
     "./src/**/*"

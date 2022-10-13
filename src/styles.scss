@@ -1,5 +1,26 @@
+@import './_themes.scss';
+@use 'sass:map';
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+body, button {
+  font-size: 1.6rem;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+// Theme logic
+@each $theme, $map in $themes {
+  :root[data-theme='#{$theme}'] { 
+    @each $key, $submap in $map {
+      --#{$key}: #{$submap};
+    }
+  }
 }

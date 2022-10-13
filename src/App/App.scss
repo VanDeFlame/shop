@@ -1,0 +1,9 @@
+@import '../_vars.scss';
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: $text-color;
+  background-color: $body-bg;
+}

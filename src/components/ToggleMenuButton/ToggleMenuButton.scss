@@ -1,0 +1,9 @@
+@import '@src/_vars.scss';
+
+.ToggleMenuButton {
+  width: 25px;
+  height: 25px;
+  border: none;
+  background-color: $body-bg-second;
+  cursor: pointer;
+}

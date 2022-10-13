@@ -1,0 +1,15 @@
+// Default
+$success: #2fbb1c;
+$warning: #f3ef1d;
+$danger: #e73023;
+$info: #17a2b8;
+
+// Theme
+$text-color: var(--text-color, #eee);
+$text-color-second: var(--text-color-second, #fff);
+$text-color-active: var(--text-color-active, #0675cf);
+$body-bg: var(--body-bg, #303030);
+$body-bg-first: var(--body-bg-first, #55555e);
+$body-bg-second: var(--body-bg-second, #44444e);
+$body-bg-third: var(--body-bg-third, #66666e);
+$body-bg-fourth: var(--body-bg-fourth, #81818b);

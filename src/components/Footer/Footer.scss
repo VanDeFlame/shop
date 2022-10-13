@@ -1,0 +1,11 @@
+@import '../../_themes.scss';
+@use 'sass:map';
+
+.Footer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  margin-top: auto;
+  background-color: map-get(map-get($themes, "dark-blue-theme"), "body-bg");
+}

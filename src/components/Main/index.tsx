@@ -7,7 +7,7 @@ interface Props {
 
 const Main:FC<Props> = ({children}) => {
   return (
-    <main className='Main'>
+    <main className='Main' id='main'>
       {children}
     </main>
   )

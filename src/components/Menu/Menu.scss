@@ -1,0 +1,67 @@
+@import '@src/_vars.scss';
+
+.Menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Menu--bg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #0008;
+}
+
+.Menu--container {
+  position: relative;
+  width: 80%;
+  height: auto;
+  padding: 30px 20px;
+  border-radius: 8px;
+  background-color: $body-bg-first;
+}
+
+.Menu--toggleButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: none;
+  color: $text-color;
+  cursor: pointer;
+
+  &:hover {
+    color: $text-color-active;
+  }
+}
+
+.Menu--container--nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Menu--container--nav > * {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  margin: 4px;
+  border: none;
+  text-decoration: none;
+  background: none;
+  
+  color: $text-color;
+}
+
+.Menu--container--nav > *:hover {
+  background-color: $body-bg-second;
+}

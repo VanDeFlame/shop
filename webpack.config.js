@@ -65,7 +65,16 @@ const config = {
       '.tsx',
       '.ts',
       '.js'
-    ]
+    ],
+    alias: {
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@styles': path.resolve(__dirname, 'src/styles'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@scripts': path.resolve(__dirname, 'src/scripts'),
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
+      '@models': path.resolve(__dirname, 'src/models'),
+      '@src': path.resolve(__dirname, 'src'),
+    }
   },
   watchOptions: {
     aggregateTimeout: 500,
@@ -73,7 +82,7 @@ const config = {
   },
 	devServer: {
     static: path.resolve(__dirname, 'dist'),
-    port: 8080,
+    port: 3000,
     open: true,
     compress: true,
 		historyApiFallback: true,
