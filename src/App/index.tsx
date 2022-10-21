@@ -9,19 +9,21 @@ import { useHandleTheme } from '@hooks/useHandleTheme';
 import { HandleThemeButton } from '@components/HandleThemeButton';
 import { ProductList } from '@components/ProductList';
 import { ProductItem } from '@components/ProductItem';
-
-let products = [
-  {name: "Tortafritas"},
-  {name: "Panchos"},
-  {name: "Medialunas"},
-  {name: "Cocacola"},
-]
+import { ProductFilter } from '@components/ProductFilter';
+import { useGetProducts } from '@hooks/useGetProducts';
+import { Product } from '@models/Product';
 
 function App() {
-  const [toggleMenu, setToggleMenu] = React.useState(false);
+  const [toggleMenu, setToggleMenu] = React.useState(false);  
+  const [products, setProducts] = React.useState<Product[]>([]);
 
   useEffect(() => {
     useHandleTheme();
+    useGetProducts
+      .then(resp => {
+        if (resp instanceof Array) setProducts(resp)
+      })
+      .catch(error => console.error(error));
   }, [])
   
   return (
@@ -36,21 +38,21 @@ function App() {
             <a href="#">Cart</a>
             <a href="#">Profile</a>
             <a href="#">Admin</a>
-            <button onClick={() => {products.push({name:"New Product"})}}>add New Product</button>
             <HandleThemeButton onClick={useHandleTheme} />
           </Menu>
         }
       </Header>
       <Main>
-        Main
-
-        <ProductList>
-          {
-            products.map((item, index) => 
-              <ProductItem product={item} key={`${index}-${item.name}`}/>
-            )
-          }
-        </ProductList>
+        <div>
+          <ProductFilter />
+          <ProductList>
+            {
+              products.map((item) => 
+                <ProductItem product={item} key={`Product-${item.productId}`}/>
+              )
+            }
+          </ProductList>
+        </div>
         
       </Main>
       <Footer>

@@ -13,8 +13,3 @@ root.render(
   <App />
 );
     
-// const html: HTMLElement = document.documentElement;
-// let defaultTheme = window.matchMedia("(prefers-color-scheme: dark)")
-//   ? 'dark-theme'
-//   : 'light-theme';
-// if (defaultTheme) html.setAttribute('data-theme', defaultTheme);

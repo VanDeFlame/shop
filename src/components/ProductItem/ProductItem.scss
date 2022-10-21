@@ -1,0 +1,30 @@
+@import '@src/__vars.scss';
+
+.ProductItem {
+  min-width: 300px;
+  margin: 10px;
+  background-color: $body-bg-second;
+}
+
+.ProductItem--price {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.price__gross {
+  width: 100%;
+  order: 0;
+}
+
+.price__freeShipping {
+  order: 1
+};
+
+.price__net {
+  order: 2;
+}
+
+.price__discount {
+  order: 3;
+  font-size: 60%;
+}

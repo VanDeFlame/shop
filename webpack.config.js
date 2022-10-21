@@ -49,6 +49,9 @@ const config = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+        process: {env: {}}
+    }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html'

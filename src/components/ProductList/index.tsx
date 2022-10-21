@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from 'react'; 
+import './ProductList.scss';
 
 interface Props {
   children: ReactNode;
