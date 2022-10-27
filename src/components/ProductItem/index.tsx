@@ -12,6 +12,7 @@ const ProductItem:FC<Props> = ({product}) => {
     product.discount = Math.floor(Math.random()*(2))*50;
     product.shippingCost = Math.round(Math.random());
     product.photo = "https://m.media-amazon.com/images/I/619NEanEPDL._AC_UL320_.jpg";
+    product.active = !!Math.round(Math.random());
   //
   const netPrice = product.price * (100 - product.discount)/100;
 
@@ -19,7 +20,7 @@ const ProductItem:FC<Props> = ({product}) => {
     <div className='ProductItem'>
       <figure className='ProductItem--figure'>
         <img 
-          className='ProductItem--figure'
+          className='ProductItem--figure--img'
           src={product.photo}
           alt={product.name}
         />
@@ -40,9 +41,9 @@ const ProductItem:FC<Props> = ({product}) => {
       </div>
       <h4 className='ProductItem--title'>{product.name}</h4>
       {
-        product.active
-        ? <button className='ProductItem--CTA'>Add to cart</button>
-        : <button className='ProductItem--CTA' disabled>Out of stock</button> 
+        // product.active
+        // ? <button className='ProductItem--CTA'>Add to cart</button>
+        // : <button className='ProductItem--CTA' disabled>Out of stock</button> 
       }
     </div>
   )

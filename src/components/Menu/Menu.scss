@@ -43,25 +43,28 @@
   }
 }
 
-.Menu--container--nav {
+.Menu--container--nav--ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  list-style: none;
 }
 
-.Menu--container--nav > * {
+.Menu--container--nav--ul > li {
   display: flex;
   align-items: center;
   height: 2rem;
   margin: 4px;
-  border: none;
-  text-decoration: none;
-  background: none;
-  
-  color: $text-color;
 }
 
-.Menu--container--nav > *:hover {
+.Menu--container--nav--ul > li:hover {
   background-color: $body-bg-second;
+}
+
+.Menu--container--nav--ul > li > * {
+  border: none;
+  text-decoration: none;
+  color: $text-color;
+  background: none;  
 }

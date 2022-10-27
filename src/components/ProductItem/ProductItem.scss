@@ -2,8 +2,21 @@
 
 .ProductItem {
   min-width: 300px;
+  width: 300px;
   margin: 10px;
+  text-decoration: none;
   background-color: $body-bg-second;
+}
+
+.ProductItem--figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.ProductItem--figure--img {
+  width: 100%;
 }
 
 .ProductItem--price {

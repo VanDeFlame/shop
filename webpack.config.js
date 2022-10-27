@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   entry: './src/index.tsx',
@@ -49,9 +50,7 @@ const config = {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-        process: {env: {}}
-    }),
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html'
