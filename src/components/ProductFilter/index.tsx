@@ -1,30 +1,23 @@
-import React, { FC, FormEvent } from 'react'; 
+import React, { FC } from 'react'; 
 import './ProductFilter.scss';
 
-interface Props {} 
+interface Props {
+  onSelectSubcategory: Function;
+  onSubmit: Function;
+} 
 
-const SubCategories = ['Shoes', 'Pants', 'T-Shirts'];
+const SubCategories = ['Frutas y verduras', 'Pastelería', 'Carnes y pescados', 'Lácteos y huevos', 'Bebidas', 'Licores', 'Cuidado personal', 'Despensa'];
 
-const ProductFilter:FC<Props> = (props) => {
+const ProductFilter:FC<Props> = ({onSelectSubcategory, onSubmit}) => {
   const [toggleFilters, setToggleFilters] = React.useState(false);
-
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget);
-    console.log(formData.get("price-min"))
-    console.log(formData.get("price-max"))
-    console.log(formData.get("discount"))
-    console.log(formData.get("free-shipping"))
-    console.log(formData.get("search"))
-  }
 
   return (
     <div className='ProductFilter'>
       <div className={`show__${toggleFilters}`}>
         <div className='ProductFilter--subcategories'>
         {
-          SubCategories.map(subcategory => (
-            <button key={subcategory}>{subcategory}</button>
+          SubCategories.map((sc, index) => (
+            <button key={sc} onClick={() => onSelectSubcategory(index)}>{sc}</button>
           ))
         }
         </div>
@@ -52,8 +45,14 @@ const ProductFilter:FC<Props> = (props) => {
           </div>
 
           <div>
-            <label htmlFor='discount'>Discount</label>
-            <input name='discount' type='checkbox' />
+            <label htmlFor='discount'>Min discount</label>
+            <select name='discount'>
+              {
+                [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(d => 
+                  <option value={d} key={'discount-'+d}>{d}%</option>
+                )
+              }
+            </select>
           </div>
 
           <div>
@@ -69,7 +68,7 @@ const ProductFilter:FC<Props> = (props) => {
         </form>
       </div>
 
-      <button onClick={() => setToggleFilters(!toggleFilters)}>
+      <button className="ProductFilter--toggleButton" onClick={() => setToggleFilters(!toggleFilters)}>
         <i className={
           `bi ${toggleFilters ? 'bi-chevron-compact-up' : 'bi-chevron-compact-down' }`}
         ></i>

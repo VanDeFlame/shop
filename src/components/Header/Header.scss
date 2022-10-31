@@ -11,3 +11,15 @@
   z-index: 500;
   background-color: $body-bg-second;
 }
+
+.Header > a {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+}
+
+.Header--logo {
+  height: 35px;
+  margin: 0 4px;
+}

@@ -1,10 +1,10 @@
 import React from "react";
 import { Product } from "@models/Product";
 import axios from "axios";
-import { useGetToken } from "./useAuthService";
+import { Category } from "@models/Category";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-// const API_TOKEN = useGetToken() //localStorage.getItem("API_TOKEN");
+const API_TOKEN = localStorage.getItem("API_TOKEN");
 
 const axiosConfig = {
   baseURL: `${API_KEY}/products`,
@@ -12,19 +12,15 @@ const axiosConfig = {
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
-    'Authorization': `Bearer `,
-    // 'Authorization': `Bearer ${API_TOKEN}`,
+    'Authorization': `Bearer ${API_TOKEN}`,
   },
 }
 
 const useGetProductAll = new Promise<Product[]>(async (resolve, reject) => {
-  axiosConfig.headers.Authorization += await useGetToken()
-  console.log(axiosConfig)
-
   axios({...axiosConfig, url: '/all',})
     .then(resp => resp.data)
     .then(resp => resolve(resp))
-    .catch(e => reject(e));
+    .catch(e => reject(e))
 })
 
 const useGetProductById = (id: number) => {
@@ -36,4 +32,18 @@ const useGetProductById = (id: number) => {
   })
 }
 
-export { useGetProductAll, useGetProductById };
+const useGetProductsWithFilters = (filters: string, category?: number) => {
+  let config = {...axiosConfig, url: `/all` }
+  if (Boolean(category)) { config.url = `/category/${category}` }
+
+  config.url += filters;
+  console.log(config)
+  return new Promise<Product[]>((resolve, reject) => {
+    axios(config)
+      .then(resp => resp.data)
+      .then(resp => resolve(resp))
+      .catch(e => reject(e));
+  })
+}
+
+export { useGetProductAll, useGetProductById, useGetProductsWithFilters };

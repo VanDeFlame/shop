@@ -27,9 +27,8 @@ const useGetToken = async () => {
   })
     .then(resp => resp.data)
     .then(resp => token = resp.jwt)
-    // .then(resp => localStorage.setItem('API_TOKEN', token))
+    .then(resp => localStorage.setItem('API_TOKEN', token))
     .catch(e => console.error(e));
-
   return token;
 }
 
