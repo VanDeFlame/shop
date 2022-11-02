@@ -75,6 +75,7 @@ const config = {
       '@scripts': path.resolve(__dirname, 'src/scripts'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@models': path.resolve(__dirname, 'src/models'),
+      '@dev': path.resolve(__dirname, 'dev'),
       '@src': path.resolve(__dirname, 'src'),
     }
   },

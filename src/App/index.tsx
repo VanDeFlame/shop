@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './App.scss';
 import { Footer } from '@components/Footer';
@@ -8,57 +8,44 @@ import { Menu } from '@components/Menu';
 import { ToggleMenuButton } from '@components/ToggleMenuButton';
 import { useHandleTheme } from '@hooks/useHandleTheme';
 import { HandleThemeButton } from '@components/HandleThemeButton';
-import { ProductList } from '@components/ProductList';
-import { ProductItem } from '@components/ProductItem';
-import { ProductFilter } from '@components/ProductFilter';
 import { ProductPage } from '@components/ProductPage';
-import { useGetProductAll, useGetProductsWithFilters } from '@hooks/useGetProductService';
-import { Product } from '@models/Product';
 import { useGetToken } from '@hooks/useAuthService';
+import { useCreateProduct } from '@hooks/usePostProductService';
+import { defaultProducts } from '@dev/defaultProducts'
+import { defaultCategories } from '@dev/defaultCategories'
+import { Home } from '@components/Home';
+import { Modal } from '@components/Modal';
+import { ProductForm } from '@components/ProductForm';
+import { Category } from '@models/Category';
+import { Product } from '@models/Product';
 
 function App() {
-  const [toggleMenu, setToggleMenu] = React.useState(false);  
-  const [products, setProducts] = React.useState<Product[]>([]);
+  const [toggleMenu, setToggleMenu] = React.useState(false);
+  const [toggleModal, setToggleModal] = React.useState(false);
+  const [categories, setCategories] = React.useState<Category[]>([])
 
   useEffect(() => {
     useHandleTheme();
-    useGetToken()
+    useGetToken();
 
-    useGetProductAll
-      .then(resp => setProducts(resp))
-      .catch(error => console.error(error))
+    setCategories(defaultCategories)
   }, [])
 
-  const onSelectSubcategory = (sc: number) => {
-    useGetProductsWithFilters('', sc)
-      .then(resp => setProducts(resp))
-    console.log(sc)
-  }
-
-  const onFilterProducts = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget);
-    const priceMin = formData.get("price-min");
-    const priceMax = formData.get("price-max");
-    const discount = formData.get("discount");
-    const freeShipping = (formData.get("free-shipping") === "on");
-    const search = formData.get("search");
-
-    let filter = '?';
-    if (Boolean(priceMin)) filter += `priceMin=${priceMin}&`;
-    if (Boolean(priceMax)) filter += `priceMax=${priceMax}&`;
-    if (Boolean(discount)) filter += `discount=${discount}&`;
-    if (Boolean(freeShipping)) filter += `freeShipping=${freeShipping}&`;
-    if (Boolean(search)) filter += `search=${search}&`;
-
-    if (filter.length <= 1) return;
-    filter = filter.slice(0, -1)
-     
-    console.log(filter)
-    useGetProductsWithFilters(filter)
-      .then(resp => setProducts(resp))
+  const toggleSubMenu = (submenu: string) => {
+    document.querySelectorAll('.Submenu').forEach(sm => 
+      sm.classList.remove('show')
+    );
+    document.querySelector(`#submenu-${submenu}`)!.classList.toggle('show')
   }
   
+  const onCreateProduct = (product: Product) => {
+    useCreateProduct(product)
+      .then(resp => console.log(resp))
+      .catch(err => console.error(err))
+
+    setToggleModal(false)
+  }
+
   return (
     <React.Fragment>
       <Router>
@@ -69,7 +56,15 @@ function App() {
               <li><Link to="/">Home</Link></li>
               <li><Link to="/cart">Cart</Link></li>
               <li><Link to="/">Profile</Link></li>
-              <li><Link to="/">Admin</Link></li>
+
+              <li>
+                <button onClick={() => toggleSubMenu('admin')}>Admin</button>
+                <ul className='Submenu' id='submenu-admin'>
+                  <button onClick={() => {setToggleMenu(false); setToggleModal(true)}}>Create Product</button>
+                  <button onClick={() => defaultProducts.map(p => useCreateProduct(p))}>DEV - Products</button>
+                </ul>
+              </li>
+              
               <li><HandleThemeButton onClick={useHandleTheme} /></li>
             </Menu>
           }
@@ -77,29 +72,11 @@ function App() {
 
         <Main>
           <Routes>
-
-            <Route path="/product/:productId" element={
-              <ProductPage />
-            }/>
+            {/* PRODUCT PAGE */}
+            <Route path="/product/:productId" element={<ProductPage />}/>
 
             {/* HOME */}
-            <Route path="/" element={
-              <div>
-                <ProductFilter
-                  onSelectSubcategory={onSelectSubcategory}
-                  onSubmit={onFilterProducts}
-                />
-                <ProductList>
-                  {
-                    products.map((item) =>
-                      <Link to={`/product/${item.productId}`} key={`Product-${item.productId}`}>
-                        <ProductItem product={item}/>
-                      </Link>
-                    )
-                  }
-                </ProductList>
-              </div>
-            }/>
+            <Route path="/" element={<Home />}/>
 
             <Route path="*" element={
               <h2>Not Found</h2>
@@ -111,6 +88,12 @@ function App() {
           Footer
         </Footer>
         
+        { 
+          toggleModal &&
+          <Modal onClose={() => setToggleModal(false)}>
+            <ProductForm categories={categories} onAction={onCreateProduct}/>
+          </Modal>
+        }
       </Router>
     </React.Fragment>
   )

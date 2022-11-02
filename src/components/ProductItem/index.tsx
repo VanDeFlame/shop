@@ -9,10 +9,10 @@ interface Props {
 const ProductItem:FC<Props> = ({product}) => {
   //
     /* DEV LOGIC */
-    product.discount = Math.floor(Math.random()*(2))*50;
-    product.shippingCost = Math.round(Math.random());
-    product.photo = "https://m.media-amazon.com/images/I/619NEanEPDL._AC_UL320_.jpg";
-    product.active = !!Math.round(Math.random());
+    // product.discount = Math.floor(Math.random()*(2))*50;
+    // product.freeShipping = Math.round(Math.random());
+    product.photo = "https://www.ikea.com/us/en/images/products/groessby-umbrella-blue-yellow__0580126_pe670065_s5.jpg?f=xs";
+    // product.active = !!Math.round(Math.random());
   //
   const netPrice = product.price * (100 - product.discount)/100;
 
@@ -35,7 +35,7 @@ const ProductItem:FC<Props> = ({product}) => {
           </React.Fragment>
         }
         {
-          (product.shippingCost === 0) &&
+          (product.freeShipping) &&
           <span>Free Shipping</span>
         }
       </div>

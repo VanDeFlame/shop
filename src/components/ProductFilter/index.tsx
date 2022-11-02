@@ -47,8 +47,9 @@ const ProductFilter:FC<Props> = ({onSelectSubcategory, onSubmit}) => {
           <div>
             <label htmlFor='discount'>Min discount</label>
             <select name='discount'>
+              <option value={''} key={'discount-0'}>All</option>
               {
-                [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(d => 
+                [10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(d => 
                   <option value={d} key={'discount-'+d}>{d}%</option>
                 )
               }

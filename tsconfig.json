@@ -19,6 +19,7 @@
       "@scripts/*": ["./src/scripts/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@models/*": ["./src/models/*"],
+      "@dev/*": ["./dev/*"],
       "@src/*": ["./src/*"],
     }, 
   },

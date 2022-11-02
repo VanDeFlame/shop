@@ -5,9 +5,9 @@ export interface Product {
   name: string;
   active: boolean;
   price: number;
-  category: Category;
   categoryId: number;
   photo: string;
   discount: number;
-  shippingCost: number;
+  freeShipping: boolean;
+  stock: number;
 }

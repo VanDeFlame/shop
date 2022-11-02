@@ -53,8 +53,9 @@
 
 .Menu--container--nav--ul > li {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  height: 2rem;
+  min-height: 2rem;
   margin: 4px;
 }
 
@@ -67,4 +68,9 @@
   text-decoration: none;
   color: $text-color;
   background: none;  
+}
+
+.Menu .Submenu:not(.show) {
+  display: none;
+  pointer-events: none;
 }
