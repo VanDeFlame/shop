@@ -6,8 +6,9 @@ export interface Product {
   active: boolean;
   price: number;
   categoryId: number;
-  photo: string;
+  photos: string[];
   discount: number;
+  description?: string;
   freeShipping: boolean;
   stock: number;
 }

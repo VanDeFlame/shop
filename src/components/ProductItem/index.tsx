@@ -11,7 +11,7 @@ const ProductItem:FC<Props> = ({product}) => {
     /* DEV LOGIC */
     // product.discount = Math.floor(Math.random()*(2))*50;
     // product.freeShipping = Math.round(Math.random());
-    product.photo = "https://www.ikea.com/us/en/images/products/groessby-umbrella-blue-yellow__0580126_pe670065_s5.jpg?f=xs";
+    product.photos = ["https://www.ikea.com/us/en/images/products/groessby-umbrella-blue-yellow__0580126_pe670065_s5.jpg?f=xs"];
     // product.active = !!Math.round(Math.random());
   //
   const netPrice = product.price * (100 - product.discount)/100;
@@ -21,7 +21,7 @@ const ProductItem:FC<Props> = ({product}) => {
       <figure className='ProductItem--figure'>
         <img 
           className='ProductItem--figure--img'
-          src={product.photo}
+          src={product?.photos?.length ? product.photos[0] : ''}
           alt={product.name}
         />
       </figure>
