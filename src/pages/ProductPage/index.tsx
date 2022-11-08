@@ -1,24 +1,30 @@
-import React, { FC, useEffect } from 'react'; 
+import React, { useEffect } from 'react'; 
 import './ProductPage.scss';
 import { useParams } from 'react-router-dom';
 import { Product } from '@models/Product';
 import { useGetProductById } from '@hooks/useGetProductService';
 import { Error } from '@components/Error';
 import { ImageGallery } from '@components/ImageGallery';
+import { ModalTrueFalse } from '@components/ModalTrueFalse';
+import { useModal } from '@hooks/useModal';
+import { useRemoveProduct } from '@hooks/usePostProductService';
 
 const ProductPage = () => {
   const [product, setProduct] = React.useState<Product>();
   const { productId } = useParams();
+  const { openModal } = useModal();
+  const [id, setId] = React.useState<number>(-1);
+
   const error = {
     error: 'Sowwy :(',
     message: 'Product not found'
   };
-
+  
   useEffect(() => {
-    let id: number = parseInt(productId!)
-    if (isNaN(id)) return;
+    let pId: number = parseInt(productId!)
+    if (isNaN(pId)) return;
     
-    useGetProductById(id)
+    useGetProductById(pId)
       .then(resp => {resp.photos = [
         "https://www.ikea.com/us/en/images/products/groessby-umbrella-blue-yellow__0580126_pe670065_s5.jpg?f=xs",
         "https://pyxis.nymag.com/v1/imgs/6e7/efe/38cda0518ffdace0248db8c2fa9dadadbe-repel-teflon-umbrella.rsquare.w600.jpg",
@@ -29,8 +35,15 @@ const ProductPage = () => {
         "https://cdn.shopify.com/s/files/1/0490/9324/7140/products/1444_blue-sky-open_1600x.jpg?v=1603668731",
       ]; return resp})
       .then(resp => setProduct(resp))
+      .then(resp => setId(pId))
       .catch(err => console.error(err));
   }, [])
+
+  const onDeleteProduct = () => {
+    useRemoveProduct(id)
+      .then(resp => console.log(resp))
+      .catch(err => console.error(err));
+  }
 
   return (
     <div>{
@@ -52,7 +65,7 @@ const ProductPage = () => {
                 {
                   (product.discount > 0) ?
                   <React.Fragment>
-                    <h4><u>${product.price}</u></h4>
+                    <h4><s>${product.price}</s></h4>
                     <h3>${product.price - product.price*(product.discount/100)}</h3>
                     <span>{product.discount}% OFF</span>
                   </React.Fragment>
@@ -72,6 +85,7 @@ const ProductPage = () => {
         </section>
         
       </div>
+      <button onClick={() => openModal(<ModalTrueFalse msg="Do you want delete this product?"/>, onDeleteProduct)}>Delete</button>
     </React.Fragment>
     }</div>
   )

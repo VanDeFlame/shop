@@ -26,17 +26,15 @@ const ProductItem:FC<Props> = ({product}) => {
         />
       </figure>
       <div className='ProductItem--price'>
-        <span className='price__net'>{  (netPrice) ? `$${netPrice}` : "FREE"  }</span>
+        { (product.freeShipping) && <span>Free Shipping</span> }
         {
-          !!product.discount && !!product.price &&
+          (product.discount > 0) ?
           <React.Fragment>
-            <span className='price__gross'>${product.price}</span>
+            <h5 className='price__gross'><s>${product.price}</s></h5>
+            <span className='price__net'>{  (netPrice) ? `$${netPrice}` : "FREE"  }</span>
             <span className='price__discount'>- {product.discount}% off</span>
           </React.Fragment>
-        }
-        {
-          (product.freeShipping) &&
-          <span>Free Shipping</span>
+          : <span className='price__net'>{ (netPrice) ? `$${netPrice}` : "FREE" }</span>
         }
       </div>
       <h4 className='ProductItem--title'>{product.name}</h4>

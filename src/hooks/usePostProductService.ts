@@ -33,7 +33,7 @@ const useEditProduct = (product: Product) => {
   }
   
   return new Promise<Product>((resolve, reject) => {
-    fetch(`${API_KEY}/products/save`, config)
+    fetch(`${API_KEY}/products/edit`, config)
       .then(resp => resp.json())
       .then(resp => resolve(resp))
       .catch(e => reject(e));
@@ -43,11 +43,11 @@ const useEditProduct = (product: Product) => {
 const useRemoveProduct = (id: number) => {
   let config = {
     ...defaultConfig,
-    body: JSON.stringify(id),
+    method: 'delete',
   }
   
-  return new Promise<Product>((resolve, reject) => {
-    fetch(`${API_KEY}/products/save`, config)
+  return new Promise((resolve, reject) => {
+    fetch(`${API_KEY}/products/delete/${id}`, config)
       .then(resp => resp.json())
       .then(resp => resolve(resp))
       .catch(e => reject(e));

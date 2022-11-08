@@ -16,6 +16,11 @@ body, button {
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
 // Theme logic
 @each $theme, $map in $themes {
   :root[data-theme='#{$theme}'] { 

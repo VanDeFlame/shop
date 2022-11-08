@@ -5,26 +5,11 @@ import { Product } from '@models/Product';
 
 interface Props {
   categories: Category[];
-  onAction: Function;
-  // {
-  //   productId: 4,
-  //   name: 'Paraguas de Bokita',
-  //   active: true,
-  //   price: 1500.0,
-  //   category: {
-  //     categoryId: 2,
-  //     category: 'Pastelería',
-  //     active: true,
-  //   },
-  //   categoryId: 2,
-  //   // photo: '',
-  //   discount: 80,
-  //   freeShipping: true,
-  //   stock: 160,
-  // },
+  onAction?: Function;
+  onClose?: Function;
 }
 
-const ProductForm:FC<Props> = ({categories, onAction}) => {
+const ProductForm:FC<Props> = ({categories, onAction, onClose}) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,7 +24,7 @@ const ProductForm:FC<Props> = ({categories, onAction}) => {
     const freeShipping = formData.get('freeShipping')?.toString() ?? '';
     const stock = formData.get('stock')?.toString() ?? '';
 
-    onAction({
+    onAction!({
       productId: 0,
       name: name,
       active: (active === 'on'),
@@ -103,6 +88,7 @@ const ProductForm:FC<Props> = ({categories, onAction}) => {
       </div>
 
       <button>Create</button>
+      <button type='button' onClick={() => onClose!()}>Cancel</button>
     </form>
   )
 }
