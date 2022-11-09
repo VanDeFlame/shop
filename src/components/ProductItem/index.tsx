@@ -1,12 +1,12 @@
-import { Product } from '@models/Product';
-import React, { FC } from 'react'; 
+import React from 'react'; 
 import './ProductItem.scss';
+import { Product } from '@models/Product';
 
 interface Props {
   product: Product;
 } 
 
-const ProductItem:FC<Props> = ({product}) => {
+function ProductItem({product}: Props) {
   //
     /* DEV LOGIC */
     // product.discount = Math.floor(Math.random()*(2))*50;
@@ -26,15 +26,15 @@ const ProductItem:FC<Props> = ({product}) => {
         />
       </figure>
       <div className='ProductItem--price'>
-        { (product.freeShipping) && <span>Free Shipping</span> }
+        { (product.freeShipping) && <span className='price__freeShipping'>Free Shipping</span> }
         {
           (product.discount > 0) ?
           <React.Fragment>
-            <h5 className='price__gross'><s>${product.price}</s></h5>
-            <span className='price__net'>{  (netPrice) ? `$${netPrice}` : "FREE"  }</span>
-            <span className='price__discount'>- {product.discount}% off</span>
+            <span className='price price__gross'>${product.price}</span>
+            <span className='price price__net'>{  (netPrice) ? `$${netPrice}` : "FREE"  }</span>
+            <span className='price price__discount'>- {product.discount}% off</span>
           </React.Fragment>
-          : <span className='price__net'>{ (netPrice) ? `$${netPrice}` : "FREE" }</span>
+          : <span className='price price__net net__gross'>{ (netPrice) ? `$${netPrice}` : "FREE" }</span>
         }
       </div>
       <h4 className='ProductItem--title'>{product.name}</h4>
@@ -47,4 +47,4 @@ const ProductItem:FC<Props> = ({product}) => {
   )
 }
 
-export { ProductItem };
+export default ProductItem;

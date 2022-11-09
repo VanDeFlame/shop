@@ -1,4 +1,4 @@
-import React, { FC, createContext, ReactNode, useState } from 'react'; 
+import React, { createContext, ReactNode, useState } from 'react'; 
 import { ContextValue } from './ContextValue';
 
 const ShopContext = createContext({} as ContextValue);
@@ -7,7 +7,7 @@ interface Props {
   children: ReactNode;
 }
 
-const ShopProvider:FC<Props> = (props) => {
+function ShopProvider({children}: Props) {
   // Modal
   const [toggleModal, setToggleModal] = useState(false);  
   const [modalComponent, setModalComponent] = React.useState<ReactNode>();
@@ -19,7 +19,7 @@ const ShopProvider:FC<Props> = (props) => {
       modalComponent,
       setModalComponent,
     }}>
-      {props.children}
+      {children}
     </ShopContext.Provider>
   )
 }

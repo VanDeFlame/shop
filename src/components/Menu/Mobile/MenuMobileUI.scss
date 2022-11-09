@@ -1,0 +1,70 @@
+@import '@src/_vars.scss';
+
+.MenuMobileUI {
+  display: flex;
+}
+
+// MODAL MENU
+.MenuMobileUI--modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MenuMobileUI--modal--bg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #0008;
+}
+
+.MenuMobileUI--modal--container {
+  position: relative;
+  width: 80%;
+  height: auto;
+  padding: 30px 20px;
+  border-radius: 8px;
+  background-color: $body-bg-first;
+}
+
+// TOGGLE MENU BUTTON 
+$button-size: 25px;
+
+.MenuMobileUI--toggleMenuButton {
+  width: $button-size;
+  height: $button-size;
+  border: none;
+  background-color: transparent;
+  color: $text-color;
+  cursor: pointer;
+
+  &:hover {
+    color: $text-color-active;
+  }
+}
+
+.MenuMobileUI--toggleMenuButton > .bi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $button-size;
+}
+
+.MenuMobileUI--modal .MenuMobileUI--toggleMenuButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.MenuMobileUI .Menu--nav li > * {
+  padding: 4px 8px;
+}
+
+.MenuMobileUI .Submenu {
+  background-color: $body-bg-second;
+}

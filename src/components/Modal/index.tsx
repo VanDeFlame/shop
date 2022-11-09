@@ -1,26 +1,21 @@
-import React, { FC, ReactNode, ReactPortal } from "react";
+import React, { ReactPortal, Suspense } from "react";
 import { createPortal } from "react-dom";
-import { useModal } from "@hooks/useModal";
-import './Modal.scss';
 import { ShopContext } from "@components/Context";
+import { Loading } from "@components/Loading";
 
-const Modal:FC = (): ReactPortal => {
+const ModalUI = React.lazy(() => import('./ModalUI')) 
+
+function Modal(): ReactPortal {
   const modal = document.getElementById('modal') as HTMLElement;
-  const { modalComponent, toggleModal } = React.useContext(ShopContext);
-  const { closeModal } = useModal();
+  const { toggleModal } = React.useContext(ShopContext);
 
   return createPortal(
-    toggleModal &&
-    <React.Fragment>
-      <div className='Modal--background'/>
-      <div className='Modal--container'>
-        <button className='Modal--toggleButton' onClick={closeModal}>x</button>
-        { modalComponent }
-      </div>
-    </React.Fragment>,
-
-    modal
-  )
+    <Suspense fallback={<Loading />}>
+      { toggleModal ? <ModalUI /> : null }
+    </Suspense>
+    
+    ,modal
+  ) 
 }
 
 export { Modal };

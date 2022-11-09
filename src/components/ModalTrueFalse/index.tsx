@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './ModalTrueFalse.scss';
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   onClose?: Function;
 }
 
-const ModalTrueFalse:FC<Props> = ({ msg, onAction, onClose }) => {
+function ModalTrueFalse({ msg, onAction, onClose }: Props) {
   return (
     <div className='ModalTrueFalse'>
       <h3>{msg}</h3>
@@ -17,4 +17,4 @@ const ModalTrueFalse:FC<Props> = ({ msg, onAction, onClose }) => {
   )
 }
 
-export { ModalTrueFalse };
+export default ModalTrueFalse;

@@ -1,16 +1,21 @@
-import React, { FC, ReactNode } from 'react'; 
-import './Footer.scss';
-
+import React, { ReactNode, Suspense } from 'react'; 
+import { useProximityShow } from '@hooks/useProximityShow';
 interface Props {
   children: ReactNode;
-} 
+}
 
-const Footer:FC<Props> = ({children}) => {
-  return (
-    <footer className='Footer'>
-      {children}
-    </footer>
-  )
+const FooterUI = React.lazy(() => import('./FooterUI')) 
+
+function Footer({children}: Props) {
+  const { show, elemRef } = useProximityShow({});
+
+  return <footer className='Footer' ref={elemRef}>
+    <Suspense fallback={'Loading...'}>{ 
+      show 
+        ? <FooterUI>{children}</FooterUI>
+        : 'Loading...' 
+    }</Suspense>
+  </footer>
 }
 
 export { Footer };

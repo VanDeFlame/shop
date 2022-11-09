@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './ImageGallery.scss';
 
 interface Props {
   images: string[];
 }
 
-const ImageGallery:FC<Props> = ({images}) => {
+function ImageGallery({images}: Props) {
   const [mainImg, setMainImg] = React.useState<number>(0);
 
   return (

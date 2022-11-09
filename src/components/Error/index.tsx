@@ -1,11 +1,11 @@
-import React, { FC } from 'react'; 
+import React from 'react'; 
 import './Error.scss';
 
 interface Props {
   error: any;  
 } 
 
-const Error:FC<Props> = ({error}) => {
+function Error({error}: Props) {
   return (
     <div className='Error'>
       <h2>{ error.error }</h2>
@@ -14,4 +14,4 @@ const Error:FC<Props> = ({error}) => {
   )
 }
 
-export { Error };
+export default Error;

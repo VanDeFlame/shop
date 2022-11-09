@@ -1,0 +1,30 @@
+@import '@src/_vars.scss';
+
+.MenuDesktopUI .Menu--nav > ul {
+  flex-direction: row;
+}
+
+.MenuDesktopUI li > * {
+  padding: 4px 8px;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.MenuDesktopUI li > .Submenu {
+  position: fixed;
+  top: 56px;
+
+  & > * {
+    width: 100%;
+    pointer-events: initial;
+  }
+}
+
+.MenuDesktopUI .Submenu > li > * {
+  width: 100%;
+  background-color: $body-bg-third;
+
+  &:hover {
+    background-color: $body-bg-fourth;
+  }
+}

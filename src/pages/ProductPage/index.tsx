@@ -1,19 +1,25 @@
 import React, { useEffect } from 'react'; 
-import './ProductPage.scss';
 import { useParams } from 'react-router-dom';
-import { Product } from '@models/Product';
-import { useGetProductById } from '@hooks/useGetProductService';
-import { Error } from '@components/Error';
+import './ProductPage.scss';
+
+// COMPONENTS
 import { ImageGallery } from '@components/ImageGallery';
-import { ModalTrueFalse } from '@components/ModalTrueFalse';
+const Error = React.lazy(() => import('@components/Error'));
+const ModalTrueFalse = React.lazy(() => import('@components/ModalTrueFalse'));
+
+// HOOKS
 import { useModal } from '@hooks/useModal';
+import { useGetProductById } from '@hooks/useGetProductService';
 import { useRemoveProduct } from '@hooks/usePostProductService';
 
-const ProductPage = () => {
+// MODELS
+import { Product } from '@models/Product';
+
+function ProductPage() {
   const [product, setProduct] = React.useState<Product>();
+  const [id, setId] = React.useState<number>(-1);
   const { productId } = useParams();
   const { openModal } = useModal();
-  const [id, setId] = React.useState<number>(-1);
 
   const error = {
     error: 'Sowwy :(',
@@ -26,13 +32,13 @@ const ProductPage = () => {
     
     useGetProductById(pId)
       .then(resp => {resp.photos = [
-        "https://www.ikea.com/us/en/images/products/groessby-umbrella-blue-yellow__0580126_pe670065_s5.jpg?f=xs",
-        "https://pyxis.nymag.com/v1/imgs/6e7/efe/38cda0518ffdace0248db8c2fa9dadadbe-repel-teflon-umbrella.rsquare.w600.jpg",
-        "https://cdn.shopify.com/s/files/1/0490/9324/7140/products/1444_blue-sky-open_1600x.jpg?v=1603668731","https://www.ikea.com/us/en/images/products/groessby-umbrella-blue-yellow__0580126_pe670065_s5.jpg?f=xs",
-        "https://pyxis.nymag.com/v1/imgs/6e7/efe/38cda0518ffdace0248db8c2fa9dadadbe-repel-teflon-umbrella.rsquare.w600.jpg",
-        "https://cdn.shopify.com/s/files/1/0490/9324/7140/products/1444_blue-sky-open_1600x.jpg?v=1603668731","https://www.ikea.com/us/en/images/products/groessby-umbrella-blue-yellow__0580126_pe670065_s5.jpg?f=xs",
-        "https://pyxis.nymag.com/v1/imgs/6e7/efe/38cda0518ffdace0248db8c2fa9dadadbe-repel-teflon-umbrella.rsquare.w600.jpg",
-        "https://cdn.shopify.com/s/files/1/0490/9324/7140/products/1444_blue-sky-open_1600x.jpg?v=1603668731",
+        'https://www.ikea.com/us/en/images/products/groessby-umbrella-blue-yellow__0580126_pe670065_s5.jpg?f=xs',
+        'https://pyxis.nymag.com/v1/imgs/6e7/efe/38cda0518ffdace0248db8c2fa9dadadbe-repel-teflon-umbrella.rsquare.w600.jpg',
+        'https://cdn.shopify.com/s/files/1/0490/9324/7140/products/1444_blue-sky-open_1600x.jpg?v=1603668731','https://www.ikea.com/us/en/images/products/groessby-umbrella-blue-yellow__0580126_pe670065_s5.jpg?f=xs',
+        'https://pyxis.nymag.com/v1/imgs/6e7/efe/38cda0518ffdace0248db8c2fa9dadadbe-repel-teflon-umbrella.rsquare.w600.jpg',
+        'https://cdn.shopify.com/s/files/1/0490/9324/7140/products/1444_blue-sky-open_1600x.jpg?v=1603668731','https://www.ikea.com/us/en/images/products/groessby-umbrella-blue-yellow__0580126_pe670065_s5.jpg?f=xs',
+        'https://pyxis.nymag.com/v1/imgs/6e7/efe/38cda0518ffdace0248db8c2fa9dadadbe-repel-teflon-umbrella.rsquare.w600.jpg',
+        'https://cdn.shopify.com/s/files/1/0490/9324/7140/products/1444_blue-sky-open_1600x.jpg?v=1603668731',
       ]; return resp})
       .then(resp => setProduct(resp))
       .then(resp => setId(pId))
@@ -85,10 +91,17 @@ const ProductPage = () => {
         </section>
         
       </div>
-      <button onClick={() => openModal(<ModalTrueFalse msg="Do you want delete this product?"/>, onDeleteProduct)}>Delete</button>
+      
+      <button 
+        onClick={() => openModal(
+          <ModalTrueFalse msg='Do you want delete this product?'/>,
+          onDeleteProduct
+        )}
+      >Delete</button>
+
     </React.Fragment>
     }</div>
   )
 }
 
-export { ProductPage };
+export default ProductPage;

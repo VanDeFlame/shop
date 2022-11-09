@@ -1,49 +1,6 @@
 @import '@src/_vars.scss';
 
-.Menu {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.Menu--bg {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: #0008;
-}
-
-.Menu--container {
-  position: relative;
-  width: 80%;
-  height: auto;
-  padding: 30px 20px;
-  border-radius: 8px;
-  background-color: $body-bg-first;
-}
-
-.Menu--toggleButton {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 25px;
-  height: 25px;
-  border: none;
-  background: none;
-  color: $text-color;
-  cursor: pointer;
-
-  &:hover {
-    color: $text-color-active;
-  }
-}
-
-.Menu--container--nav--ul {
+.Menu--nav ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,26 +8,39 @@
   list-style: none;
 }
 
-.Menu--container--nav--ul > li {
+.Menu--nav ul > li {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 2rem;
   margin: 4px;
+  cursor: pointer;
+  pointer-events: initial;
 }
 
-.Menu--container--nav--ul > li:hover {
-  background-color: $body-bg-second;
-}
-
-.Menu--container--nav--ul > li > * {
+.Menu--nav li > * {
   border: none;
+  border-radius: 4px;
   text-decoration: none;
   color: $text-color;
   background: none;  
+  cursor: pointer;
+
+  // Hover effect in any element, except ul
+  &:not(ul):hover {
+    background-color: $body-bg-third;
+  }
 }
 
-.Menu .Submenu:not(.show) {
+.Menu--nav .Submenu {
+  display: flex;
+  background-color: $body-bg-second;
+}
+
+.Menu--nav .Submenu:not(.show) {
   display: none;
-  pointer-events: none;
+
+  & > * {
+    pointer-events: none;
+  }
 }

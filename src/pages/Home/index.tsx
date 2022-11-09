@@ -1,14 +1,20 @@
-import React, { FC, FormEvent, useEffect } from 'react'; 
-import './Home.scss';
-import { useGetProductAll, useGetProductsWithFilters } from '@hooks/useGetProductService';
+import React, { FormEvent, lazy, useEffect } from 'react'; 
 import { Link } from 'react-router-dom';
-import { ProductFilter } from '@components/ProductFilter';
-import { ProductList } from '@components/ProductList';
-import { ProductItem } from '@components/ProductItem';
-import { Product } from '@models/Product';
-import { Error } from '@components/Error';
+import './Home.scss';
 
-const Home:FC = () => {
+// COMPONENTS
+import { ProductList } from '@components/ProductList';
+import { ProductFilter } from '@components/ProductFilter';
+const ProductItem = lazy(() => import('@components/ProductItem'));
+const Error = lazy(() => import('@components/Error'));
+
+// HOOKS
+import { useGetProductAll, useGetProductsWithFilters } from '@hooks/useGetProductService';
+
+// MODELS
+import { Product } from '@models/Product';
+
+function Home() {
   const [products, setProducts] = React.useState<Product[]>([]);
   const [error, setError] = React.useState<any>(false);
 
@@ -74,4 +80,4 @@ const Home:FC = () => {
   )
 }
 
-export { Home };
+export default Home;

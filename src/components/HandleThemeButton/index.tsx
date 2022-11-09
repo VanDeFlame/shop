@@ -1,14 +1,14 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './HandleThemeButton.scss';
 
 interface Props {
   onClick: Function;
 }
 
-const HandleThemeButton:FC<Props> = ({onClick}) => {
+function HandleThemeButton({onClick}: Props) {
   return (
     <button onClick={() => onClick()}>Change theme</button>
   )
 }
 
-export { HandleThemeButton };
+export default HandleThemeButton;

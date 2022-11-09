@@ -1,7 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './ProductForm.scss';
 import { Category } from '@models/Category';
-import { Product } from '@models/Product';
 
 interface Props {
   categories: Category[];
@@ -9,7 +8,7 @@ interface Props {
   onClose?: Function;
 }
 
-const ProductForm:FC<Props> = ({categories, onAction, onClose}) => {
+function ProductForm({categories, onAction, onClose}: Props) {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -93,4 +92,4 @@ const ProductForm:FC<Props> = ({categories, onAction, onClose}) => {
   )
 }
 
-export { ProductForm };
+export default ProductForm;

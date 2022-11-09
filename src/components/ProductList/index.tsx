@@ -1,11 +1,11 @@
-import React, { FC, ReactNode } from 'react'; 
+import React, { ReactNode } from 'react'; 
 import './ProductList.scss';
 
 interface Props {
   children: ReactNode;
 } 
 
-const ProductList:FC<Props> = ({children}) => {
+function ProductList({children}: Props) {
   return (
     <div className='ProductList'>
       {children}
