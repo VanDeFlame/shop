@@ -1,3 +1,11 @@
 .Home {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+}
+
+@media (min-width: 860px) {
+  .Home {
+    flex-direction: row;
+  }
 }

@@ -27,7 +27,7 @@ function Home() {
       })
   }, [])
 
-  const onSelectSubcategory = (sc: number) => {
+  const onSelectCategory = (sc: number) => {
     useGetProductsWithFilters('', sc)
       .then(resp => setProducts(resp))
     console.log(sc)
@@ -63,7 +63,7 @@ function Home() {
   return (
     <div className='Home'>
       <ProductFilter
-        onSelectSubcategory={onSelectSubcategory}
+        onSelectCategory={onSelectCategory}
         onSubmit={onFilterProducts}
       />
       { Boolean(error) && <Error error={error} /> }

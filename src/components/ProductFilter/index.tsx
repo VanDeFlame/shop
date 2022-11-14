@@ -1,23 +1,24 @@
-import React, { FC } from 'react'; 
+import React from 'react'; 
 import './ProductFilter.scss';
 
 interface Props {
-  onSelectSubcategory: Function;
+  onSelectCategory: Function;
   onSubmit: Function;
 } 
 
-const SubCategories = ['Frutas y verduras', 'Pastelería', 'Carnes y pescados', 'Lácteos y huevos', 'Bebidas', 'Licores', 'Cuidado personal', 'Despensa'];
+const Categories = ['Frutas y verduras', 'Pastelería', 'Carnes y pescados', 'Lácteos y huevos', 'Bebidas', 'Licores', 'Cuidado personal', 'Despensa'];
 
-const ProductFilter:FC<Props> = ({onSelectSubcategory, onSubmit}) => {
+function ProductFilter({onSelectCategory, onSubmit}: Props) {
   const [toggleFilters, setToggleFilters] = React.useState(false);
 
   return (
     <div className='ProductFilter'>
       <div className={`show__${toggleFilters}`}>
-        <div className='ProductFilter--subcategories'>
+        <div className='ProductFilter--categories'>
+          <h3>Categories</h3>
         {
-          SubCategories.map((sc, index) => (
-            <button key={sc} onClick={() => onSelectSubcategory(index)}>{sc}</button>
+          Categories.map((sc, index) => (
+            <button key={sc} onClick={() => onSelectCategory(index)}>{sc}</button>
           ))
         }
         </div>
@@ -26,12 +27,13 @@ const ProductFilter:FC<Props> = ({onSelectSubcategory, onSubmit}) => {
           className='ProductFilter--attributes'
           onSubmit={e => onSubmit(e)}
         >
+          <h3>Filters</h3>
           <div className='priceRange'>
             <input 
               className='priceRange--input' 
               type='number' 
               name='price-min' 
-              placeholder='min price' 
+              placeholder='min price'
               min={0}
             />
             <span>&#8722;</span>
@@ -39,7 +41,7 @@ const ProductFilter:FC<Props> = ({onSelectSubcategory, onSubmit}) => {
               className='priceRange--input' 
               type='number' 
               name='price-max' 
-              placeholder='max price' 
+              placeholder='max price'
               min={5}
             />
           </div>
